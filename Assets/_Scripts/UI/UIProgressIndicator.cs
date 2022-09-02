@@ -2,17 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public sealed class UIProgressIndicator : MonoBehaviour {
-    [SerializeField] private Image indicator;
-    private PlayerPathFollower playerPathFollower;
+    [SerializeField] private Slider progressSlider;
+    [SerializeField] private PlayerPathFollower playerPathFollower;
 
-    private void Awake() => playerPathFollower = FindObjectOfType<PlayerPathFollower>();
+    private void OnEnable() => playerPathFollower.OnCoverGround += UpdateIndicator;
 
-    private void OnEnable() => playerPathFollower.OnDestinationChanged += UpdateIndicator;
+    private void OnDisable() => playerPathFollower.OnCoverGround -= UpdateIndicator;
 
-    private void OnDisable() => playerPathFollower.OnDestinationChanged -= UpdateIndicator;
-
-    private void UpdateIndicator( float progress ) {
-        progress = Mathf.Clamp( progress, 0f, 1f );
-        indicator.fillAmount = progress;
-    }
+    // progress is between 0 - 1 and represent ratio of travelled distance of total distance
+    private void UpdateIndicator( float progress ) => progressSlider.value = Mathf.Clamp01( progress );
 }

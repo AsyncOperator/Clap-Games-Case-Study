@@ -1,4 +1,4 @@
-public interface ICollectable
-{
-    void OnCollect();
+public interface ICollectable {
+    bool CanCollect { get; set; }
+    void Collect();
 }

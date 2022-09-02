@@ -142,3 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb2f9f7643830e4eb44d3e23c67c1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleOnZAxis: 0.075
+  boxCollider: {fileID: 7949038579914181974}
