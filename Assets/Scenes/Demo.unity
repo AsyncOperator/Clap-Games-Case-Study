@@ -6452,24 +6452,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8953760768701570461, guid: ddf2339ed9bf6574c94d3fb88630fc47,
         type: 3}
-      propertyPath: gravity
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953760768701570461, guid: ddf2339ed9bf6574c94d3fb88630fc47,
-        type: 3}
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 320506070}
-    - target: {fileID: 8953760768701570461, guid: ddf2339ed9bf6574c94d3fb88630fc47,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953760768701570461, guid: ddf2339ed9bf6574c94d3fb88630fc47,
-        type: 3}
-      propertyPath: maxAcceleration
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf2339ed9bf6574c94d3fb88630fc47, type: 3}
 --- !u!114 &4380154117093793963 stripped
