@@ -23,9 +23,6 @@ public sealed class PlayerPathFollower : MonoBehaviour {
     private float distanceTravelled;
     private bool canMove = false;
 
-    [SerializeField] private float maxAcceleration;
-    [SerializeField, ReadOnly] private Vector3 velocity;
-
     private VertexPath vertexPath;
     private new Transform transform;
 
@@ -64,16 +61,16 @@ public sealed class PlayerPathFollower : MonoBehaviour {
         directionXZ = IsGrounded ? directionXZ.Change( y: -0.2f ) : directionXZ.Change( y: gravity );
 
         float speedXZ = IsGrounded ? groundSpeed : glideSpeed;
-        velocity = directionXZ * speedXZ * Time.deltaTime;
+        Vector3 velocity = directionXZ * speedXZ * Time.deltaTime;
 
         characterController.Move( velocity );
 
-        float t = vertexPath.GetClosestTimeOnPath( transform.position );
-        OnCoverGround?.Invoke( t );
+        float ratioOfTravelledDistance = vertexPath.GetClosestTimeOnPath( transform.position );
+        OnCoverGround?.Invoke( ratioOfTravelledDistance );
 
         IsGrounded = characterController.isGrounded;
 
-        if ( Mathf.Approximately( t, 1f ) ) {
+        if ( Mathf.Approximately( ratioOfTravelledDistance, 1f ) ) {
             GameManager.Instance.ChangeGameState( GameManager.GameState.Win );
         }
     }

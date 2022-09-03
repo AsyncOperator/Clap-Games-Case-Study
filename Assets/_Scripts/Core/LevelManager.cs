@@ -19,7 +19,7 @@ public sealed class LevelManager : Singleton<LevelManager> {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int totalSceneCount = SceneManager.sceneCountInBuildSettings;
 
-        int sceneIndexToLoad = currentSceneIndex <= totalSceneCount - 1 ? currentSceneIndex++ : 0;
+        int sceneIndexToLoad = currentSceneIndex <= totalSceneCount - 1 ? currentSceneIndex + 1 : 0;
         StartCoroutine( LoadAsynchronouly( sceneIndexToLoad ) );
     }
 
@@ -27,15 +27,9 @@ public sealed class LevelManager : Singleton<LevelManager> {
         AsyncOperation operation = SceneManager.LoadSceneAsync( sceneIndex );
 
         loadingScreen.SetActive( true );
-        //operation.allowSceneActivation = false;
-
 
         yield return new WaitUntil( () => operation.isDone );
-        //while ( !operation.isDone ) {
-        //    yield return null;
-        //}
 
-        //operation.allowSceneActivation = true;
         loadingScreen.SetActive( false );
 
         OnSceneLoaded?.Invoke();
