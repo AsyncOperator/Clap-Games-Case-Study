@@ -6,7 +6,7 @@ public sealed class StepCreator : MonoBehaviour {
     [SerializeField] private Basket basket;
 
     public void TryPlaceStep() {
-        GameObject removedObject = basket.RemoveObject();
+        GameObject removedObject = basket.GetGameObject();
         if ( removedObject != null ) {
 
             removedObject.transform.position = playerTransform.position + playerTransform.TransformDirection( new Vector3( 0f, placementOffset.x, placementOffset.y ) );

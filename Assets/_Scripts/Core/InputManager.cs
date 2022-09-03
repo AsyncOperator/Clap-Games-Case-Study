@@ -6,14 +6,16 @@ public sealed class InputManager : MonoBehaviour {
     private float? lastRegisteredClickTime;
 
     private void Update() {
-        if ( Input.GetMouseButton( 0 ) ) {
-            if ( lastRegisteredClickTime == null ) {
-                lastRegisteredClickTime = Time.time;
-                stepCreator?.TryPlaceStep();
-            }
-            else if ( Time.time - lastRegisteredClickTime >= waitTimeBetweenClick ) {
-                lastRegisteredClickTime = Time.time;
-                stepCreator?.TryPlaceStep();
+        if ( GameManager.Instance.CurrentState == GameManager.GameState.Ongoing ) {
+            if ( Input.GetMouseButton( 0 ) ) {
+                if ( lastRegisteredClickTime == null ) {
+                    lastRegisteredClickTime = Time.time;
+                    stepCreator?.TryPlaceStep();
+                }
+                else if ( Time.time - lastRegisteredClickTime >= waitTimeBetweenClick ) {
+                    lastRegisteredClickTime = Time.time;
+                    stepCreator?.TryPlaceStep();
+                }
             }
         }
     }

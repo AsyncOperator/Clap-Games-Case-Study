@@ -4,7 +4,7 @@ public sealed class Basket : MonoBehaviour {
 
     [SerializeField] private BasketCollectionHandler basketCollectionHandler;
 
-    public GameObject RemoveObject() => basketCollectionHandler.Pop();
+    public GameObject GetGameObject() => basketCollectionHandler.Pop();
 
-    public void AddObject( GameObject go ) => basketCollectionHandler.Push( go );
+    public void AddGameObject( GameObject go ) => basketCollectionHandler.Push( go );
 }

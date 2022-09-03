@@ -8,6 +8,8 @@ public sealed class LevelManager : Singleton<LevelManager> {
 
     public static event Action OnSceneLoaded;
 
+    public string GetLevelName() => SceneManager.GetActiveScene().name;
+
     public void RestartLevel() => StartCoroutine( LoadAsynchronouly( SceneManager.GetActiveScene().buildIndex ) );
 
     /// <summary>

@@ -8,7 +8,7 @@ public sealed class Brick : MonoBehaviour, ICollectable {
     public bool CanCollect { get; set; } = true;
 
     public void Collect() {
-        FindObjectOfType<Basket>().AddObject( gameObject );
+        FindObjectOfType<Basket>().AddGameObject( gameObject );
         CanCollect = false; // Since using the same brick as a step we do not want to collect it again
         boxCollider.enabled = false; // To not bother playerCollisionHandler anymore
     }
