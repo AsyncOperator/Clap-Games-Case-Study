@@ -16,9 +16,12 @@ public sealed class PlayerPathFollower : MonoBehaviour {
     [SerializeField, Min( 0f )] private float glideSpeed;
     [SerializeField] private float gravity;
 
+#if UNITY_EDITOR
+    [SerializeField] private bool debug;
+#endif
+
     private float distanceTravelled;
     private bool canMove = false;
-
 
     [SerializeField] private float maxAcceleration;
     [SerializeField, ReadOnly] private Vector3 velocity;
@@ -48,7 +51,9 @@ public sealed class PlayerPathFollower : MonoBehaviour {
         }
 
 #if UNITY_EDITOR
-        CollisionFlagDebugging();
+        if ( debug ) {
+            CollisionFlagDebugging();
+        }
 #endif
 
         distanceTravelled = vertexPath.GetClosestDistanceAlongPath( transform.position );

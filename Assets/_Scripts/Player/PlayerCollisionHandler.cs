@@ -12,6 +12,10 @@ public class PlayerCollisionHandler : MonoBehaviour {
     [Tooltip( "Touching any object in this layer causes the player to die/lose" )]
     [SerializeField] private LayerMask deathLayer;
 
+#if UNITY_EDITOR
+    [SerializeField] private bool debug;
+#endif
+
     public event Action<Transform> OnPlayerDeath;
 
     private void OnTriggerEnter( Collider other ) {
@@ -27,11 +31,13 @@ public class PlayerCollisionHandler : MonoBehaviour {
         if ( ( deathLayer & ( 1 << hit.gameObject.layer ) ) != 0 ) {
 
 #if UNITY_EDITOR
-            var sphere = GameObject.CreatePrimitive( PrimitiveType.Sphere );
-            sphere.name = "(DEBUG OBJECT) Show Hit Point";
-            sphere.transform.parent = null;
-            sphere.transform.position = hit.point;
-            sphere.transform.localScale = Vector3.one * 0.01f;
+            if ( debug ) {
+                var sphere = GameObject.CreatePrimitive( PrimitiveType.Sphere );
+                sphere.name = "(DEBUG OBJECT) Show Hit Point";
+                sphere.transform.parent = null;
+                sphere.transform.position = hit.point;
+                sphere.transform.localScale = Vector3.one * 0.01f;
+            }
 #endif
 
             PlayerRagdoll playerRagdollInstance = Instantiate( playerRagdoll, transform.position, transform.rotation );

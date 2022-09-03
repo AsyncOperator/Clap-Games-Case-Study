@@ -2,25 +2,19 @@ using UnityEngine;
 using TMPro;
 
 public sealed class UICoinDisplayer : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI coinTMP;
+    [SerializeField] private TextMeshProUGUI coinDisplayText;
 
     private void OnEnable() {
         if ( GameManager.Instance != null ) {
-            GameManager.Instance.OnNumberOfCollectedCoinsChanged += UpdateDisplayText;
-        }
-        else {
-            Debug.LogError( "Could not subscribe GameManager event since its null" );
+            GameManager.Instance.OnNumberOfCollectedCoinsChanged += UpdateCoinDisplayText;
         }
     }
 
     private void OnDisable() {
         if ( GameManager.Instance != null ) {
-            GameManager.Instance.OnNumberOfCollectedCoinsChanged -= UpdateDisplayText;
-        }
-        else {
-            Debug.LogError( "Could not unsubscribe GameManager event since its null" );
+            GameManager.Instance.OnNumberOfCollectedCoinsChanged -= UpdateCoinDisplayText;
         }
     }
 
-    public void UpdateDisplayText( int value ) => coinTMP.SetText( value.ToString() );
+    public void UpdateCoinDisplayText( int numberOfCollectedCoins ) => coinDisplayText.SetText( numberOfCollectedCoins.ToString() );
 }
